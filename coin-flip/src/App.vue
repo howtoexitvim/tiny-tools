@@ -3,7 +3,7 @@
     <!-- Header -->
     <header class="text-center mb-12 animate-fade-in">
       <h1 class="text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-pink-500 mb-4">
-        CoinFlip Stats - 概率实验室
+        BNBU CoinFlip Stats - 概率实验室
       </h1>
       <p class="text-slate-500 text-lg max-w-2xl mx-auto">
         探索大数定律。抛掷十枚硬币，观察实际频率如何趋近于完美的二项分布曲线。
