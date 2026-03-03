@@ -29,11 +29,11 @@
           
           <div class="flex flex-wrap gap-4 justify-center">
             <button @click="handleSimulate" :disabled="isFlipping" class="btn-primary flex items-center gap-2">
-              <span v-if="!isFlipping">模拟抛掷 (10枚)</span>
+              <span v-if="!isFlipping">模拟抛掷 1 次</span>
               <span v-else>抛掷中...</span>
             </button>
+            <button @click="handleBatch(10)" :disabled="isFlipping" class="btn-secondary">批量模拟 10 次</button>
             <button @click="handleBatch(100)" :disabled="isFlipping" class="btn-secondary">批量模拟 100 次</button>
-            <button @click="handleBatch(1000)" :disabled="isFlipping" class="btn-secondary">批量模拟 1000 次</button>
             <button @click="handleReset" class="px-6 py-3 rounded-full text-slate-400 hover:text-slate-700 transition-colors cursor-pointer">
               清空数据
             </button>
@@ -51,7 +51,7 @@
       </section>
 
       <!-- Right: Summary & History -->
-      <aside class="space-y-8">
+      <aside class="flex flex-col gap-8">
         <!-- Stats summary -->
         <div class="glass p-8">
           <h2 class="text-xl font-bold mb-6 text-slate-700">实验数据概览</h2>
@@ -61,10 +61,6 @@
               <span class="text-2xl font-mono text-indigo-600 font-bold">{{ totalRounds }}</span>
             </div>
             <div class="flex justify-between items-center">
-              <span class="text-slate-500">总抛掷硬币数</span>
-              <span class="text-2xl font-mono text-indigo-600 font-bold">{{ totalFlips }}</span>
-            </div>
-            <div class="flex justify-between items-center">
               <span class="text-slate-500">最近正面个数</span>
               <span class="text-2xl font-mono text-pink-500 font-bold">{{ lastHeads }}</span>
             </div>
@@ -72,14 +68,14 @@
         </div>
 
         <!-- History -->
-        <div class="glass p-8 flex-1 overflow-hidden">
-          <h2 class="text-xl font-bold mb-6 text-slate-700">最近 10 次记录</h2>
-          <div class="space-y-3">
-            <div v-for="item in history" :key="item.id" class="flex justify-between items-center p-3 rounded-xl bg-slate-100/80 border border-slate-200/60 animate-slide-in">
+        <div class="glass p-6 flex-1 overflow-hidden">
+          <h2 class="text-lg font-bold mb-4 text-slate-700">最近 10 次记录</h2>
+          <div class="space-y-2">
+            <div v-for="item in history" :key="item.id" class="flex justify-between items-center px-3 py-2 rounded-lg bg-slate-100/80 border border-slate-200/60 animate-slide-in">
               <span class="text-sm text-slate-400">{{ new Date(item.id).toLocaleTimeString() }}</span>
               <span class="font-bold text-indigo-600">{{ item.heads }} 正面</span>
             </div>
-            <div v-if="history.length === 0" class="text-center py-12 text-slate-400">
+            <div v-if="history.length === 0" class="text-center py-8 text-slate-400">
               尚无实验数据
             </div>
           </div>
