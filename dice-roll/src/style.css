@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Dice Theme — Teal/Emerald palette */
+  --color-primary: #0d9488;
+  /* Teal */
+  --color-secondary: #f59e0b;
+  /* Amber */
+}
+
+body {
+  font-family: var(--font-sans);
+  @apply bg-slate-50 text-slate-800 antialiased min-h-screen;
+  background: linear-gradient(135deg, #ecfdf5 0%, #fffbeb 50%, #f0fdfa 100%);
+}
+
+/* Glassmorphism — Light variant */
+.glass {
+  @apply bg-white/70 backdrop-blur-md border border-white/80 shadow-lg rounded-3xl;
+}
+
+.glass-dark {
+  @apply bg-white/60 backdrop-blur-lg border border-slate-200/60 shadow-xl rounded-3xl;
+}
+
+/* Unified button styles */
+.btn-primary {
+  @apply px-6 py-3 rounded-full bg-teal-600 hover:bg-teal-500 text-white font-semibold transition-all shadow-lg hover:shadow-teal-500/30 active:scale-95 cursor-pointer;
+}
+
+.btn-secondary {
+  @apply px-5 py-2.5 rounded-full bg-teal-600/90 hover:bg-teal-500 text-white font-medium transition-all shadow-md hover:shadow-teal-500/25 active:scale-95 cursor-pointer text-sm;
+}
+
+.btn-dice-count {
+  @apply w-12 h-12 rounded-2xl font-bold text-lg transition-all duration-200 cursor-pointer border-2;
+}
+
+.btn-dice-count.active {
+  @apply bg-teal-600 text-white border-teal-600 shadow-lg shadow-teal-500/30 scale-105;
+}
+
+.btn-dice-count:not(.active) {
+  @apply bg-white/80 text-slate-600 border-slate-200 hover:border-teal-400 hover:text-teal-600;
+}
+
+/* Dice face styles */
+.dice-face {
+  @apply w-16 h-16 rounded-xl bg-white border-2 border-slate-200 shadow-md;
+  display: grid;
+  padding: 8px;
+}
+
+.dice-dot {
+  @apply w-3 h-3 rounded-full bg-teal-700;
+}
+
+/* Dice 3D */
+.dice-3d {
+  transform-style: preserve-3d;
+}
