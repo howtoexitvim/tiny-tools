@@ -67,16 +67,13 @@
           </div>
         </div>
 
-        <!-- History -->
+        <!-- Heads Count Stats -->
         <div class="glass p-6 flex-1 overflow-hidden">
-          <h2 class="text-lg font-bold mb-4 text-slate-700">最近 10 次记录</h2>
+          <h2 class="text-lg font-bold mb-4 text-slate-700">正面硬币数量统计</h2>
           <div class="space-y-2">
-            <div v-for="item in history" :key="item.id" class="flex justify-between items-center px-3 py-2 rounded-lg bg-slate-100/80 border border-slate-200/60 animate-slide-in">
-              <span class="text-sm text-slate-400">{{ new Date(item.id).toLocaleTimeString() }}</span>
-              <span class="font-bold text-indigo-600">{{ item.heads }} 正面</span>
-            </div>
-            <div v-if="history.length === 0" class="text-center py-8 text-slate-400">
-              尚无实验数据
+            <div v-for="i in 11" :key="i" class="flex justify-between items-center px-3 py-1.5 rounded-lg bg-slate-100/80 border border-slate-200/60">
+              <span class="text-sm text-slate-500">{{ i - 1 }} 个正面</span>
+              <span class="font-bold text-indigo-600">{{ stats[i - 1] }} 次</span>
             </div>
           </div>
         </div>
