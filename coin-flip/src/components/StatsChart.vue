@@ -109,6 +109,7 @@ const updateOptions = () => {
       {
         type: 'value',
         name: '次数',
+        max: totalExperiments === 0 ? 10 : Math.ceil(totalExperiments * 0.35),
         nameTextStyle: { color: '#64748b' },
         axisLabel: { color: '#64748b' },
         splitLine: { lineStyle: { color: '#e2e8f0' } }

@@ -3,7 +3,7 @@
     <!-- Header -->
     <header class="text-center mb-12 animate-fade-in">
       <h1 class="text-5xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-pink-500 mb-4">
-        BNBU CoinFlip Stats - 概率实验室
+        CoinFlip Stats - 概率实验室
       </h1>
       <p class="text-slate-500 text-lg max-w-2xl mx-auto">
         探索大数定律。抛掷十枚硬币，观察实际频率如何趋近于完美的二项分布曲线。
@@ -42,17 +42,11 @@
 
         <!-- Chart Card -->
         <div class="glass-dark p-8">
-          <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold flex items-center gap-2 text-slate-700">
-              <span class="w-2 h-6 bg-indigo-500 rounded-full"></span>
-              实时统计分布
-            </h2>
-            <label class="flex items-center gap-2 cursor-pointer text-sm text-slate-500 hover:text-slate-700 transition">
-              <input type="checkbox" v-model="showExperimental" class="rounded text-indigo-500 focus:ring-indigo-500 bg-slate-100 border-slate-300" />
-              显示实验概率
-            </label>
-          </div>
-          <StatsChart :stats="stats" :theoretical="theoretical" :show-experimental="showExperimental" />
+          <h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-slate-700">
+            <span class="w-2 h-6 bg-indigo-500 rounded-full"></span>
+            实时统计分布
+          </h2>
+          <StatsChart :stats="stats" :theoretical="theoretical" :show-experimental="true" />
         </div>
       </section>
 
@@ -111,7 +105,6 @@ const { stats, totalFlips, totalRounds, history, theoretical, simulateOnce, batc
 const currentFlips = ref(new Array(10).fill(true));
 const isFlipping = ref(false);
 const isNeutral = ref(true); // Start with "?" state
-const showExperimental = ref(true);
 
 const lastHeads = computed(() => {
   if (history.value.length === 0) return '-';
