@@ -8,7 +8,8 @@ import * as echarts from 'echarts';
 
 const props = defineProps({
   stats: Array,
-  theoretical: Array
+  theoretical: Array,
+  showExperimental: Boolean
 });
 
 const chartRef = ref(null);
@@ -28,6 +29,55 @@ const initChart = () => {
 const updateOptions = () => {
   if (!chart) return;
   
+  const totalExperiments = props.stats.reduce((a, b) => a + b, 0);
+  const experimentalData = totalExperiments > 0 
+    ? props.stats.map(val => +(val / totalExperiments).toFixed(4))
+    : new Array(11).fill(0);
+
+  const series = [
+    {
+      name: '实验次数',
+      type: 'bar',
+      data: [...props.stats],
+      itemStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: '#818cf8' },
+          { offset: 1, color: '#6366f1' }
+        ]),
+        borderRadius: [6, 6, 0, 0]
+      },
+      barMaxWidth: 40,
+      tooltip: { valueFormatter: (value) => value }
+    },
+    {
+      name: '理论概率',
+      type: 'line',
+      yAxisIndex: 1,
+      data: props.theoretical,
+      smooth: true,
+      lineStyle: { color: '#ec4899', width: 3 },
+      itemStyle: { color: '#ec4899' },
+      symbol: 'circle',
+      symbolSize: 6,
+      tooltip: { valueFormatter: (value) => value.toFixed(4) }
+    }
+  ];
+
+  if (props.showExperimental) {
+    series.push({
+      name: '实验概率',
+      type: 'line',
+      yAxisIndex: 1,
+      data: experimentalData,
+      smooth: true,
+      lineStyle: { color: '#10b981', width: 3, type: 'dashed' },
+      itemStyle: { color: '#10b981' },
+      symbol: 'emptyCircle',
+      symbolSize: 6,
+      tooltip: { valueFormatter: (value) => value.toFixed(4) }
+    });
+  }
+
   const options = {
     backgroundColor: 'transparent',
     tooltip: {
@@ -38,7 +88,7 @@ const updateOptions = () => {
       textStyle: { color: '#334155' }
     },
     legend: {
-      data: ['实验次数', '理论概率'],
+      data: ['实验次数', '理论概率', '实验概率'],
       bottom: 0,
       textStyle: { color: '#64748b' }
     },
@@ -66,38 +116,13 @@ const updateOptions = () => {
       {
         type: 'value',
         name: '概率',
-        max: 0.3,
+        max: 0.35,
         nameTextStyle: { color: '#64748b' },
         axisLabel: { color: '#64748b' },
         splitLine: { show: false }
       }
     ],
-    series: [
-      {
-        name: '实验次数',
-        type: 'bar',
-        data: [...props.stats],
-        itemStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: '#818cf8' },
-            { offset: 1, color: '#6366f1' }
-          ]),
-          borderRadius: [6, 6, 0, 0]
-        },
-        barMaxWidth: 40
-      },
-      {
-        name: '理论概率',
-        type: 'line',
-        yAxisIndex: 1,
-        data: props.theoretical,
-        smooth: true,
-        lineStyle: { color: '#ec4899', width: 3 },
-        itemStyle: { color: '#ec4899' },
-        symbol: 'circle',
-        symbolSize: 6
-      }
-    ],
+    series: series,
     animationDuration: 600
   };
   
@@ -106,7 +131,7 @@ const updateOptions = () => {
 
 onMounted(initChart);
 
-watch(() => props.stats, updateOptions, { deep: true });
+watch(() => [props.stats, props.showExperimental], updateOptions, { deep: true });
 
 onUnmounted(() => {
   if (resizeHandler) window.removeEventListener('resize', resizeHandler);
