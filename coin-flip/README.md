@@ -32,8 +32,8 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/howtousellm/coin-flip.git
-cd coin-flip
+git clone https://github.com/howtoexitvim/tiny-tools.git
+cd tiny-tools/coin-flip
 
 # 安装依赖
 npm install
@@ -91,8 +91,8 @@ npm run build
 
 ```bash
 # Clone the repository
-git clone https://github.com/howtousellm/coin-flip.git
-cd coin-flip
+git clone https://github.com/howtoexitvim/tiny-tools.git
+cd tiny-tools/coin-flip
 
 # Install dependencies
 npm install
