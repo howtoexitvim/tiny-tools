@@ -123,4 +123,3 @@ This project is deployed on **Vercel** using the **Vite** framework preset — z
 ## License
 
 MIT
-
