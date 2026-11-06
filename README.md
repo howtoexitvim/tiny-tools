@@ -44,3 +44,4 @@ Vue 3 (Composition API), Vite, Tailwind CSS, ECharts for the plots, GSAP for the
 ## License
 
 [MIT](LICENSE)
+
